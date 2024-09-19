@@ -12,8 +12,8 @@ fun main(){
             Pilih menu dibawah ini:
                 1. Tambah Pemasukan
                 2. Tambah Pengeluaran
-                3. Riwayat Transaksi
-                4. Analisis Keuangan
+                3. Riwayat Keuangan
+                4. Analisa Keuangan
                 5. Keluar
         """.trimIndent())
         print("Input your choice: ")

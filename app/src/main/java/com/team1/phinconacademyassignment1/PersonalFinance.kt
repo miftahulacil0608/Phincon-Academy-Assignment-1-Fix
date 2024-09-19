@@ -27,7 +27,7 @@ class PersonalFinance {
     fun addTransaction(typeInput: TypeInput) {
         var condition: Boolean
         do {
-            println("====== Tambahkan $typeInput ======")
+            println("====== Tambahkan ${typeInput} ======")
             print("Nominal $typeInput: ")
             val inputNominal = readlnOrNull()
             print("Keterangan: ")
@@ -54,7 +54,7 @@ class PersonalFinance {
                     val convertNominalToLong = inputNominal?.toLong() ?: 0L
                     calculateMoney(
                         numberOfMoney = convertNominalToLong,
-                        inputDescription = inputDescription,
+                        inputDescription = inputDescription!!,
                         typeOfTransaction = typeInput
                     )
                     condition = false
@@ -66,7 +66,7 @@ class PersonalFinance {
 
     private fun calculateMoney(
         numberOfMoney: Long,
-        inputDescription: String?,
+        inputDescription: String,
         typeOfTransaction: TypeInput
     ) {
         if (typeOfTransaction == TypeInput.PEMASUKAN) {
