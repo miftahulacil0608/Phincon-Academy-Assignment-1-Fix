@@ -2,6 +2,7 @@ package com.team1.assignment1_ahmadmiftahulazisz.assignment1
 
 import com.team1.assignment1_ahmadmiftahulazisz.assignment1.Helper.dateConvertToString
 import com.team1.assignment1_ahmadmiftahulazisz.assignment1.Helper.regexFormat
+import com.team1.phinconacademyassignment1.TypeInput
 import java.time.LocalDate
 import kotlin.system.exitProcess
 
@@ -24,11 +25,11 @@ class PersonalFinance {
         )
     )
 
-    fun addTransaction(typeOfTransaction: String) {
+    fun addTransaction(typeInput: TypeInput) {
         var condition: Boolean
         do {
-            println("====== Tambahkan $typeOfTransaction ======")
-            print("Nominal $typeOfTransaction: ")
+            println("====== Tambahkan $typeInput ======")
+            print("Nominal $typeInput: ")
             val inputNominal = readlnOrNull()
             print("Keterangan: ")
             val inputDescription = readlnOrNull()
@@ -55,7 +56,7 @@ class PersonalFinance {
                     calculateMoney(
                         numberOfMoney = convertNominalToLong,
                         inputDescription = inputDescription,
-                        typeOfTransaction = typeOfTransaction
+                        typeOfTransaction = typeInput
                     )
                     condition = false
                 }
@@ -67,13 +68,13 @@ class PersonalFinance {
     private fun calculateMoney(
         numberOfMoney: Long,
         inputDescription: String?,
-        typeOfTransaction: String
+        typeOfTransaction: TypeInput
     ) {
-        if (typeOfTransaction == "Pemasukan") {
+        if (typeOfTransaction == TypeInput.PEMASUKAN) {
             numberOfBalance += numberOfMoney //total uang
             listOfTransaction.add(
                 DataTransaction(
-                    typeTransaction = typeOfTransaction,
+                    typeTransaction = typeOfTransaction.toString(),
                     numberOfTransaction = numberOfMoney,
                     description = inputDescription,
                     date = LocalDate.now().dateConvertToString()
@@ -81,11 +82,11 @@ class PersonalFinance {
             )
             totalOfIncome += numberOfMoney //total pendapatan
 
-        } else if (typeOfTransaction == "Pengeluaran") {
+        } else if (typeOfTransaction == TypeInput.PENGELUARAN) {
             numberOfBalance -= numberOfMoney //total uang
             listOfTransaction.add(
                 DataTransaction(
-                    typeOfTransaction,
+                    typeOfTransaction.toString(),
                     numberOfTransaction = numberOfMoney,
                     description = inputDescription,
                     date = LocalDate.now().dateConvertToString()

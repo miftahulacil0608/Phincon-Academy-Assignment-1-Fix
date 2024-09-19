@@ -1,5 +1,6 @@
-package com.team1.assignment1_ahmadmiftahulazisz.assignment1
+package com.team1.phinconacademyassignment1
 
+import com.team1.assignment1_ahmadmiftahulazisz.assignment1.PersonalFinance
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
@@ -20,10 +21,10 @@ fun main(){
         val inputMenuUser = readln()
         when(inputMenuUser){
             "1"->{
-                personalFinance.addTransaction("Pemasukan")
+                personalFinance.addTransaction(TypeInput.PEMASUKAN)
             }
             "2"->{
-                personalFinance.addTransaction("Pengeluaran")
+                personalFinance.addTransaction(TypeInput.PENGELUARAN)
             }
             "3"->{
                 personalFinance.riwayatTransaksi()
