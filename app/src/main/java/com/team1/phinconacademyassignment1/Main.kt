@@ -1,6 +1,5 @@
 package com.team1.phinconacademyassignment1
 
-import com.team1.assignment1_ahmadmiftahulazisz.assignment1.PersonalFinance
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
@@ -27,10 +26,10 @@ fun main(){
                 personalFinance.addTransaction(TypeInput.PENGELUARAN)
             }
             "3"->{
-                personalFinance.riwayatTransaksi()
+                personalFinance.financialHistory()
             }
             "4"->{
-                personalFinance.analysisOfMoney()
+                personalFinance.financialAnalysis()
             }
             "5"->{
                 println("Terima Kasih")

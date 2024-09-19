@@ -1,8 +1,7 @@
-package com.team1.assignment1_ahmadmiftahulazisz.assignment1
+package com.team1.phinconacademyassignment1
 
-import com.team1.assignment1_ahmadmiftahulazisz.assignment1.Helper.dateConvertToString
-import com.team1.assignment1_ahmadmiftahulazisz.assignment1.Helper.regexFormat
-import com.team1.phinconacademyassignment1.TypeInput
+import com.team1.phinconacademyassignment1.Helper.dateConvertToString
+import com.team1.phinconacademyassignment1.Helper.regexFormat
 import java.time.LocalDate
 import kotlin.system.exitProcess
 
@@ -96,7 +95,7 @@ class PersonalFinance {
         }
     }
 
-    fun riwayatTransaksi() {
+    fun financialHistory() {
         println("====== Riwayat Transaksi ======")
         listOfTransaction.forEach {
             println(
@@ -112,7 +111,7 @@ class PersonalFinance {
     }
 
 
-    fun analysisOfMoney() {
+    fun financialAnalysis() {
         println("====== Keuangan Anda ======")
         println(
             """
