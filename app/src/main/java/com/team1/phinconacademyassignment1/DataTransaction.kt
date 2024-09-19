@@ -1,4 +1,4 @@
-package com.team1.assignment1_ahmadmiftahulazisz.assignment1
+package com.team1.phinconacademyassignment1
 
 data class DataTransaction(
     val typeTransaction: String,
