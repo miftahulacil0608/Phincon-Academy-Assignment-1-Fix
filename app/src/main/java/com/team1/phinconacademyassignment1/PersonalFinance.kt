@@ -6,62 +6,40 @@ import java.time.LocalDate
 import kotlin.system.exitProcess
 
 class PersonalFinance {
-    private var numberOfBalance = 3_000_000L
-    private var totalOfIncome = 3_500_000L
-    private var totalOfExpense = 500_000L
-    private var listOfTransaction: MutableList<DataTransaction> = mutableListOf(
-        DataTransaction(
-            typeTransaction = "Pemasukan",
-            numberOfTransaction = 3_500_000L,
-            description = "Keuntungan Jual beli HP",
-            date = "01-09-2024"
-        ),
-        DataTransaction(
-            typeTransaction = "Pengeluaran",
-            numberOfTransaction = 500_000L,
-            description = "Kebutuhan bulanan",
-            date = "15-09-2024"
-        )
-    )
+    private var numberOfBalance = 0L
+    private var totalOfIncome = 0L
+    private var totalOfExpense = 0L
+    private var listOfTransaction: MutableList<DataTransaction> = mutableListOf()
 
     fun addTransaction(typeInput: TypeInput) {
-        var condition: Boolean
-        do {
-            println("====== Tambahkan ${typeInput} ======")
+
+        while (true) {
+            println("====== Tambahkan $typeInput ======")
             print("Nominal $typeInput: ")
-            val inputNominal = readlnOrNull()
-            print("Keterangan: ")
-            val inputDescription = readlnOrNull()
+            val inputNominal = readln().trim()
 
-            // atau "[0-9]+" pattern regex untuk mengecek inputan awal-akhir berupa angka atau bukan jika menggunakan .matches
-            val validateInputNominal = inputNominal?.let { regexFormat.matches(it) } ?: false
-
-            // inputan dicek dulu 0 atau endak, jika iya kembalikan 0, jika tidak gunakan lengthnya dan lihat apakah >= dengan 5
-            val validateDescription = (inputDescription?.length ?: 0) >= 5
-
-            when {
-                !validateInputNominal -> {
-                    println("Inputan nominal anda harus angka")
-                    condition = true
-                }
-
-                !validateDescription -> {
-                    println("Deskripsi yang anda berikan minimal 5 huruf")
-                    condition = true
-                }
-
-                else -> {
-                    val convertNominalToLong = inputNominal?.toLong() ?: 0L
-                    calculateMoney(
-                        numberOfMoney = convertNominalToLong,
-                        inputDescription = inputDescription!!,
-                        typeOfTransaction = typeInput
-                    )
-                    condition = false
-                }
+            val validateInputNominal = regexFormat.matches(inputNominal)
+            if (!validateInputNominal) {
+                println("Inputan nominal salah")
+                continue
             }
-        } while (condition)
 
+            print("Keterangan: ")
+            val inputDescription = readln().trim()
+            val validateDescription = inputDescription.length >= 5
+            if (!validateDescription) {
+                println("Deskripsi yang anda berikan minimal 5 huruf")
+                continue
+            }
+
+            val convertNominalToLong = inputNominal.toLong()
+            calculateMoney(
+                numberOfMoney = convertNominalToLong,
+                inputDescription = inputDescription,
+                typeOfTransaction = typeInput
+            )
+            break
+        }
     }
 
     private fun calculateMoney(
@@ -76,7 +54,8 @@ class PersonalFinance {
                     typeTransaction = typeOfTransaction.toString(),
                     numberOfTransaction = numberOfMoney,
                     description = inputDescription,
-                    date = LocalDate.now().dateConvertToString()
+                    date = LocalDate.now().dateConvertToString(),
+                    lastBalance = numberOfBalance
                 )
             )
             totalOfIncome += numberOfMoney //total pendapatan
@@ -88,7 +67,8 @@ class PersonalFinance {
                     typeOfTransaction.toString(),
                     numberOfTransaction = numberOfMoney,
                     description = inputDescription,
-                    date = LocalDate.now().dateConvertToString()
+                    date = LocalDate.now().dateConvertToString(),
+                    lastBalance = numberOfBalance
                 )
             )
             totalOfExpense += numberOfMoney //total pengeluaran
@@ -96,17 +76,23 @@ class PersonalFinance {
     }
 
     fun financialHistory() {
-        println("====== Riwayat Transaksi ======")
-        listOfTransaction.forEach {
-            println(
-                """
+        if (listOfTransaction.isEmpty()){
+            println("Tidak Ada Riwayat")
+        }else{
+            println("====== Riwayat Transaksi ======")
+            listOfTransaction.forEach {
+                println(
+                    """
                         ---Tanggal ${it.date}---
-                Jenis Transaksi     : ${it.typeTransaction}
-                Jumlah Transaksi    : ${it.numberOfTransaction}
-                Deskripsi Transaksi : ${it.description}
+                Jenis Transaksi     : Rp ${it.typeTransaction}
+                Jumlah Transaksi    : Rp ${it.numberOfTransaction}
+                Deskripsi Transaksi : Rp ${it.description}
+                Total Uang          : Rp ${it.lastBalance}
             """.trimIndent()
-            )
+                )
+            }
         }
+
         inputMenuUser()
     }
 
@@ -115,9 +101,9 @@ class PersonalFinance {
         println("====== Keuangan Anda ======")
         println(
             """
-            Total Pemasukan     : Rp. $totalOfIncome
-            Total Pengeluaran   : Rp. $totalOfExpense
-            Jumlah saldo akhir  : Rp. $numberOfBalance
+            Total Pemasukan     : Rp $totalOfIncome
+            Total Pengeluaran   : Rp $totalOfExpense
+            Jumlah saldo akhir  : Rp $numberOfBalance
             
         """.trimIndent()
         )
@@ -134,20 +120,11 @@ class PersonalFinance {
         """.trimIndent()
             )
             print("Your Choice: ")
-            val inputMenuUser = readln()
+            val inputMenuUser = readln().trim()
             when (inputMenuUser) {
-                "98" -> {
-                    return
-                }
-
-                "99" -> {
-                    //status 0 itu normal exit
-                    exitProcess(0)
-                }
-
-                else -> {
-                    println("Inputan anda salah")
-                }
+                "98" -> return
+                "99" -> exitProcess(0)
+                else -> println("Inputan anda salah")
             }
         } while (true)
     }

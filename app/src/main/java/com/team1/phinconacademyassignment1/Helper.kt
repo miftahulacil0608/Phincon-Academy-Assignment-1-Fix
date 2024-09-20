@@ -4,7 +4,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 object Helper {
-    //extension function
     val regexFormat = "^[0-9]+$".toRegex()
 
     fun LocalDate.dateConvertToString():String{

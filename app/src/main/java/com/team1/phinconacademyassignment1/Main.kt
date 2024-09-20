@@ -5,9 +5,8 @@ import kotlinx.coroutines.runBlocking
 
 fun main(){
     val personalFinance = PersonalFinance()
-
     do {
-        println("===Personal Finance Application===")
+        println("===Personal Finance Manager Application===")
         println("""
             Pilih menu dibawah ini:
                 1. Tambah Pemasukan
@@ -16,21 +15,17 @@ fun main(){
                 4. Analisa Keuangan
                 5. Keluar
         """.trimIndent())
-        print("Input your choice: ")
-        val inputMenuUser = readln()
+        print("Masukkan pilihan anda: ")
+        val inputMenuUser = readln().trim()
         when(inputMenuUser){
-            "1"->{
-                personalFinance.addTransaction(TypeInput.PEMASUKAN)
-            }
-            "2"->{
-                personalFinance.addTransaction(TypeInput.PENGELUARAN)
-            }
-            "3"->{
-                personalFinance.financialHistory()
-            }
-            "4"->{
-                personalFinance.financialAnalysis()
-            }
+            "1"->personalFinance.addTransaction(TypeInput.PEMASUKAN)
+
+            "2"->personalFinance.addTransaction(TypeInput.PENGELUARAN)
+
+            "3"->personalFinance.financialHistory()
+
+            "4"->personalFinance.financialAnalysis()
+
             "5"->{
                 println("Terima Kasih")
                 break
