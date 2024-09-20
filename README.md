@@ -19,7 +19,7 @@ Dalam pengembangan Aplikasi Personal Finance Manager, developer menggunakan Kotl
 - Collection: MutableList
 
 ## Alur Aplikasi
-![Blueprint Aplikasi Fix](https://github.com/user-attachments/assets/6c1c0fe0-c22e-4c88-bb18-49611332c9f6)
+![Blueprint Aplikasi Fix Light](https://github.com/user-attachments/assets/848fe35a-40c8-400a-aeee-502c9830df90)
 
 ## Screenshot Aplikasi
 - Menu Utama
